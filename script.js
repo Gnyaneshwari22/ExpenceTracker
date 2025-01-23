@@ -23,10 +23,12 @@ userForm.addEventListener("submit", function (event) {
   if (editIndex !== null) {
     // If editing, update the existing expense data
     Expenses[editIndex] = ExpenseData;
+    alert("Expense updated sucessfully");
     editIndex = null; // Reset edit index
   } else {
     // If not editing, add a new expense
     Expenses.push(ExpenseData);
+    alert("Expense added sucessfully");
   }
 
   // Save the updated Expenses array back to local storage
@@ -50,7 +52,7 @@ function displayExpenses() {
       <div class="expense-cards">
         ${Expenses.map(
           (expense, index) => `
-          <div class="expense-card">
+          <div class="user-card">
             <div class="expense-info">
               <p><strong>Expense Amount:</strong> ${expense.ExpenseAmount}</p>
               <p><strong>Description:</strong> ${expense.description}</p>
@@ -74,7 +76,6 @@ function displayExpenses() {
 function editExpense(index) {
   const Expenses = JSON.parse(localStorage.getItem("Expenses"));
 
-  // Get the selected expense
   const expense = Expenses[index];
 
   // Populate the form with the expense's data
@@ -82,7 +83,6 @@ function editExpense(index) {
   document.getElementById("description").value = expense.description;
   document.getElementById("categeory").value = expense.categeory;
 
-  // Set the edit index to update the expense instead of adding a new one
   editIndex = index;
 }
 
@@ -92,6 +92,8 @@ function deleteExpense(index) {
 
   // Remove the selected expense from the array
   Expenses.splice(index, 1);
+
+  alert("Expense deleted successfully");
 
   // Save the updated array back to local storage
   localStorage.setItem("Expenses", JSON.stringify(Expenses));
